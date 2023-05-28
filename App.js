@@ -1,20 +1,47 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { View, StyleSheet, ImageBackground, Dimensions } from 'react-native';
+import RegistrationScreen from './assets/Screens/RegistrationScreen';
+import LoginScreen from './assets/Screens/LoginScreen';
 
-export default function App() {
+const App = () => {
+  const [isLoginScreen, setIsLoginScreen] = useState(false);
+
+  const switchToLogin = () => {
+    setIsLoginScreen(true);
+  };
+
+  const switchToRegistration = () => {
+    setIsLoginScreen(false);
+  };
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+    <>
+      {isLoginScreen ? (
+      <LoginScreen switchToRegistration={switchToRegistration} />
+  ) : (
+      <RegistrationScreen switchToLogin={switchToLogin} />
+  )}
+    </>
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+);
+};
+
+// const styles = StyleSheet.create({
+//   appContainer: {
+//     flex: 1,
+//   },
+//   image: {
+//     flex: 1,
+//     resizeMode: 'cover',
+//     justifyContent: "center",
+//     // position: 'absolute',
+//     // top: 0,
+//     // right: 0,
+//     // bottom: 0,
+//     // left: 0
+//     width: '100%',
+//     height: '100%',
+//     },
+//   });
+
+export default App;
