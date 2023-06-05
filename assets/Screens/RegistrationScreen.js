@@ -13,14 +13,16 @@ const handleRegistration = () => {
   console.log('Username:', username);
   console.log('Email:', email);
   console.log('Password:', password);
-    };
+  setIsKeyboardOpen(false);
+  Keyboard.dismiss();
+};
   
 return (
   <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
     <View style={styles.container}>
       <ImageBackground source={require('../images/background.jpg')} style={styles.background}>
-        <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-          <View style={{...styles.form, paddingBottom: isKeyboardOpen ? 78 : 78}}>
+        <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : ''}>
+          <View style={{...styles.form, paddingBottom: isKeyboardOpen ? 0 : 78}}>
             <Text style={styles.header}>Registration</Text>
             <TextInput
               style={styles.input}
@@ -73,6 +75,7 @@ return (
   const styles = StyleSheet.create({
     container: {
       flex: 1,
+      flexDirection: 'column',
       backgroundColor: '#ffffff'
     },
     background: {
@@ -86,7 +89,7 @@ return (
       borderTopLeftRadius: 25,  
       borderTopRightRadius: 25,
       // paddingBottom: 78,
-      paddingTop: 92
+      paddingTop: 92,
     },
     header: {
       textAlign: 'center',
