@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Keyboard, TouchableWithoutFeedback, StyleSheet, TouchableOpacity, ImageBackground, KeyboardAvoidingView } from 'react-native';
 
+const initialState = {
+  username: '',
+  email: '',
+  password: '',
+}
+
 const RegistrationScreen = ({ switchToLogin }) => {
-    const [username, setUsername] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [showPassword, setShowPassword] = useState(false);
-    const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
+  const [state, setState] = useState(initialState);
+  const [showPassword, setShowPassword] = useState(false);
+  const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
   
 const handleRegistration = () => {
-  console.log('Registration Form Data:');
-  console.log('Username:', username);
-  console.log('Email:', email);
-  console.log('Password:', password);
+  console.log(state);
   setIsKeyboardOpen(false);
   Keyboard.dismiss();
 };
@@ -27,24 +28,21 @@ return (
             <TextInput
               style={styles.input}
               placeholder="Username"
-              value={username}
-              onChangeText={setUsername}
+              onChangeText={(value) => setState((prevState) => ({...prevState, username: value}))}
               onFocus={() => setIsKeyboardOpen(true)}
             />
            <TextInput
              style={styles.input}
              placeholder="Email"
-             value={email}
-             onChangeText={setEmail}
              keyboardType="email-address"
              onFocus={() => setIsKeyboardOpen(true)}
+             onChangeText={(value) => setState((prevState) => ({...prevState, email: value}))}
            />
         <View style={styles.passwordInputContainer}>
           <TextInput
             style={styles.passwordInput}
             placeholder="Password"
-            value={password}
-            onChangeText={setPassword}
+            onChangeText={(value) => setState((prevState) => ({...prevState, password: value}))}
             secureTextEntry={!showPassword}
             onFocus={() => setIsKeyboardOpen(true)}
           />
